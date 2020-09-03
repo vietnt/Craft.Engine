@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Craft.Engine", "Craft.Engine\Craft.Engine.fsproj", "{B3018E2D-E6A2-43CD-A1B3-232C55FC6277}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Craft.Playground", "Craft.Playground\Craft.Playground.fsproj", "{69164166-9CD8-4FD7-A19E-376BF0D24083}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Craft.AnsLZ", "Craft.AnsLZ\Craft.AnsLZ.fsproj", "{DCC4F233-F257-409D-9AD0-BF031CF1CFE1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B3018E2D-E6A2-43CD-A1B3-232C55FC6277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3018E2D-E6A2-43CD-A1B3-232C55FC6277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3018E2D-E6A2-43CD-A1B3-232C55FC6277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3018E2D-E6A2-43CD-A1B3-232C55FC6277}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69164166-9CD8-4FD7-A19E-376BF0D24083}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69164166-9CD8-4FD7-A19E-376BF0D24083}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69164166-9CD8-4FD7-A19E-376BF0D24083}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69164166-9CD8-4FD7-A19E-376BF0D24083}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCC4F233-F257-409D-9AD0-BF031CF1CFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCC4F233-F257-409D-9AD0-BF031CF1CFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCC4F233-F257-409D-9AD0-BF031CF1CFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCC4F233-F257-409D-9AD0-BF031CF1CFE1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

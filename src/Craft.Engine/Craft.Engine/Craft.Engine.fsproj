@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Common.fs" />
+        <Compile Include="Temp.fs" />
+        <Compile Include="Math.fs" />
+        <Compile Include="OS.fs" />
+        <Compile Include="Game.fs" />
+        <Compile Include="GPU.fs" />
+        <Compile Include="Compression.fs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Vortice.D3DCompiler" Version="1.6.0" />
+      <PackageReference Include="Vortice.Direct3D11" Version="1.6.0" />
+      <PackageReference Include="Vortice.DXGI" Version="1.6.0" />
+    </ItemGroup>
+
+</Project>
