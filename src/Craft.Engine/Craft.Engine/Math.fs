@@ -367,6 +367,17 @@ module Matrix4x4 =
             c3 = vec4 m2.M41 m2.M42 m2.M43 m2.M44
         }
         
+    let inline createOrtho left right bot top nz fz =
+        let rw = 1.0f / (right - left)
+        let rh = 1.0f / (top - bot)
+        let fR = 1.0f / (fz - nz)
+        {
+            c0 = vec4 (rw + rh) 0.f 0.f 0.f
+            c1 = vec4 0.f (rw + rh) 0.f 0.f
+            c2 = vec4 0.f 0.f fR 0.f
+            c3 = vec4 (-(left + right) * rw) (-(top+bot)*rh) (-fR * nz) 1.0f             
+        }
+        
 type Matrix4x4 with
     static member (*) (a: Matrix4x4, b: Vector4) = a |> Matrix4x4.mulV b
     static member (*) (a: Matrix4x4, b: Vector3) = a |> Matrix4x4.mulV3 b

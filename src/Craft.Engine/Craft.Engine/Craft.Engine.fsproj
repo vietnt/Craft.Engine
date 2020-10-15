@@ -9,15 +9,19 @@
         <Compile Include="Temp.fs" />
         <Compile Include="Math.fs" />
         <Compile Include="OS.fs" />
-        <Compile Include="Game.fs" />
+        <Compile Include="CoreFX.fs" />
+        <Compile Include="Models.fs" />
+        <Compile Include="MeshPool.fs" />
         <Compile Include="GPU.fs" />
+        <Compile Include="Game.fs" />
+        <Compile Include="ConstantBuffer.fs" />
         <Compile Include="Compression.fs" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Vortice.D3DCompiler" Version="1.6.0" />
-      <PackageReference Include="Vortice.Direct3D11" Version="1.6.0" />
-      <PackageReference Include="Vortice.DXGI" Version="1.6.0" />
+      <PackageReference Include="Vortice.D3DCompiler" Version="1.8.17" />
+      <PackageReference Include="Vortice.Direct3D11" Version="1.8.17" />
+      <PackageReference Include="Vortice.DXGI" Version="1.8.17" />
     </ItemGroup>
 
 </Project>

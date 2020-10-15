@@ -9,6 +9,7 @@ open System.Runtime.InteropServices
 open Microsoft.FSharp.NativeInterop
 open System
     
+// AMD 3xxx = 16-32MB L3    
 let Size = 256*1024
 let BigSize = Size * 4
 let MaxRegister = 16 //4MB

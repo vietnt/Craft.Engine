@@ -211,7 +211,7 @@ let wndProc (hwnd: IntPtr) (msg: WM) (wP: IntPtr) (l: IntPtr) =
         else            
             GetClientRect(hwnd, &windowDesc.clientRect) |> ignore
             let w = windowDesc.clientRect |> getRectWidth
-            let h = windowDesc.clientRect |> getRectHeight
+            let h = windowDesc.clientRect |> getRectHeight            
             windowDesc.resize <- Some (w, h) 
         IntPtr.Zero
     | WM.GameDone ->

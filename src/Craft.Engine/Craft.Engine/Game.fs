@@ -3,6 +3,7 @@
 open System
 open System.Diagnostics
 open System.Threading
+open Craft.Engine
 
 type ScreenMode =
     | FullScreen
@@ -44,16 +45,23 @@ let create name width height mode =
         desc = desc
     }
     
-let loop init app =    
-    let (load, unload, update, exit), state = init app.desc
+let loop init app =
+    let load' w h load gpu =
+        let sw = gpu |> GPU.createSwapChain w h app.desc.hwnd
+        load sw 
+        sw
+    let gpu, (load, unload, update, exit), state = init app.desc
     // load
-    load state
+    let rect = app.desc.windowedRect
+    let w = rect.right - rect.left
+    let h = rect.bottom - rect.top    
     // main-loop
     let mutable q = false
     let desc = app.desc
     let time = Stopwatch.StartNew()
     let mutable passed = 0.0
     let mutable inputState = { mouseLeftDown = false; mouseLeftUp = true; mouseX = 0; mouseY = 0; keys = Map.empty}
+    let mutable swapChain =  gpu |> load' w h (fun sw -> state |> load sw) 
     
     while not q do
         q <- OS.handleMessages()
@@ -72,9 +80,11 @@ let loop init app =
                     inputState <- { inputState with keys = inputState.keys |> Map.remove code }                    
         if desc.maximized then
             Thread.Sleep 1
-        elif desc.resize |> Option.isSome then
-            //let (w, h) = desc.resize |> Option.get
-            load state 
+        elif desc.resize |> Option.isSome then            
+            let (w, h) = desc.resize |> Option.get
+            if swapChain.width <> w || swapChain.height <> h then             
+                state |> unload swapChain
+                swapChain <- gpu |> load' w h (fun sw -> state |> load sw)              
             desc.resize <- None
         else            
             let t = time.Elapsed.TotalSeconds
@@ -82,5 +92,5 @@ let loop init app =
             passed <- t
             let delta = if delta >= 0.2f then 0.05f else delta                
             state |> update delta inputState
-    state |> unload
+    state |> unload swapChain
     state |> exit
