@@ -255,7 +255,8 @@ let bindMeshPool (pool: MeshPool) (gpu: GpuContext) =
     
 let draw id (gpu: GpuContext) =
     match currentMeshPool |> MeshPool.tryGet id with
-    | ValueNone -> ()
+    | ValueNone ->
+        failwithf "can't find mesh id: %A" id          
     | ValueSome m ->
         gpu.ctx.DrawIndexed (m.count, m.indexOffset, m.vertexOffset)
         
