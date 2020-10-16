@@ -2,7 +2,6 @@
 
 open System.IO
 open Craft.Engine
-open Craft.Engine.Game
 open Craft.Engine.Math
 open Vortice.DXGI
 open Vortice.Mathematics
@@ -38,14 +37,14 @@ let init mode windowDesc =
     let uiShader = gpu |> GPU.loadShader stream
     
     let uiMesh = gpu |> MeshPool.create 32 1024
-    let vts = [|
-        createVertexUI 100.f -100.f 0.f 0.f 0.f 0.f 1.0f 1.0f
-        createVertexUI 500.f -100.f 1.0f 0.f 0.f 1.0f 0.f 1.0f 
-        createVertexUI 100.f -500.f 0.f 1.0f 1.0f 0.f 0.f 1.0f 
-        createVertexUI 500.f -500.f 1.0f 1.0f 1.0f 1.0f 1.0f 1.0f 
-    |]
-    let ids = [| 0; 1; 2; 1; 3; 2 |]
-    let id = uiMesh |> MeshPool.add vts ids 0 4 6
+//    let vts = [|
+//        createVertexUI 100.f 100.f 0.f 0.f 0.f 0.f 1.0f 1.0f
+//        createVertexUI 300.f 100.f 1.0f 0.f 0.f 1.0f 0.f 1.0f 
+//        createVertexUI 100.f 300.f 0.f 1.0f 1.0f 0.f 0.f 1.0f 
+//        createVertexUI 300.f 300.f 1.0f 1.0f 1.0f 1.0f 1.0f 1.0f 
+//    |]
+//    let ids = [| 0; 1; 2; 1; 3; 2 |]
+//    let id = uiMesh |> MeshPool.add vts ids 0 4 6
     let mutable uiMatrix = Matrix4x4.identity
     
     let state = {
@@ -53,12 +52,31 @@ let init mode windowDesc =
     } 
     
     let load (sw: SwapChain) state =
-        uiMatrix <- Matrix4x4.createOrtho 0.f (float32 sw.width) (-float32 sw.height) 0.f -100.0f 100.0f
+        uiMatrix <- Matrix4x4.createOrtho2 (float32 sw.width) (float32 sw.height) -100.0f 100.0f
         state.swapChain <- sw 
     
     let unload (sw: SwapChain) state  = ()
     
-    let update time (input: InputState) state =                        
+    let update time (input: Game.InputState) state =
+        
+        let vts = [|
+            createVertexUI -50.f -50.f 0.f 0.f 0.f 0.f 1.0f 1.0f
+            createVertexUI 50.f -50.f 1.0f 0.f 0.f 1.0f 0.f 1.0f 
+            createVertexUI -50.f 50.f 0.f 1.0f 1.0f 0.f 0.f 1.0f 
+            createVertexUI 50.f 50.f 1.0f 1.0f 1.0f 1.0f 1.0f 1.0f 
+        |]
+        let vts = [|
+            for r in vts do            
+                { r with pos = r.pos + vec2 (float32 input.mouseX) (float32 input.mouseY) }        
+        |]
+        
+        // ui elements -> render record -> another thread
+        //
+                
+        let ids = [| 0; 1; 2; 1; 3; 2 |]
+        let id = uiMesh |> MeshPool.add vts ids 0 4 6
+        
+        
         cbPool |> ConstantBuffer.reset
         // setup
         cbPool |> ConstantBuffer.newSub

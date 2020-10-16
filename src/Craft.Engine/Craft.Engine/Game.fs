@@ -1,4 +1,5 @@
-﻿module Craft.Engine.Game
+﻿[<RequireQualifiedAccess>]
+module Craft.Engine.Game
 
 open System
 open System.Diagnostics
